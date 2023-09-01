@@ -13,12 +13,14 @@ jobs:
       matrix:
         ruby: ["3.0", "3.1", "3.2"]
     steps:
-      - uses: actions/checkout@v3
-      - uses: ruby/setup-ruby@v1
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Ruby with version specified
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
-      - name: test
+      - name: Run tests
         run: bundle exec rake
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
